@@ -1,0 +1,58 @@
+NAME
+  pacapt (batch-pacapt) - An Arch's pacman-like package manager for Windows.
+
+  More details can be found at https://github.com/Grenadingue/batch-pacapt .
+  Details about the original pacapt script at https://github.com/icy/pacapt .
+
+SYNTAX
+
+  $ pacapt <option(s)> <operation(s)> <package(s)>
+
+OPERATIONS
+
+  Basic
+    -h or --help    print this help message
+    -P              print supported operations
+    -V              print version information
+
+  Query
+    -Q              list all installed packages
+    -Qc <package>   show package's changelog
+    -Qi <package>   print package status
+    -Ql <package>   list package's files
+    -Qm             list installed packages that aren't available
+                    in any installation source
+    -Qo <file>      query package that provides <file>
+    -Qp <file>      query a package file (don't use package database)
+    -Qs <package>   search for installed package
+
+  Synchronize
+    -S <package>    install package(s)
+    -Ss <package>   search for packages
+    -Su             upgrade the system
+    -Sy             update package database
+    -Suy            update package database, then upgrade the system
+
+  Remove / Clean up
+    -R <packages>   remove some packages
+    -Sc             delete old downloaded packages
+    -Scc            delete all downloaded packages
+    -Sccc           clean variant files.
+                    (debian) See also http://dragula.viettug.org/blogs/646
+
+OPTIONS
+
+    -w              download packages but don't install them
+    --noconfirm     don't wait for user's confirmation
+
+EXAMPLES
+
+  1. To install a package from Debian's backports repository
+      $ pacapt -S foobar -t lenny-backports
+      $ pacapt -S -- -t lenny-backports foobar
+
+  2. To update package database and then update your system
+      $ pacapt -Syu
+
+  3. To download a package without installing it
+      $ pacapt -Sw foobar
