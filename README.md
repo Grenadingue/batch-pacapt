@@ -2,4 +2,4 @@
 An Arch's pacman-like package manager for Windows
 
 # Description
-An adaptation of the great [`pacapt`](https://github.com/icy/pacapt) script, in `batch`, for Windows
+An adaptation, an equivalence for Windows, of the great [`pacapt`](https://github.com/icy/pacapt). It aims to add a [`pacman`](https://wiki.archlinux.org/index.php/Pacman) like experience to [`chocolatey`](https://github.com/chocolatey/choco).
