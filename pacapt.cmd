@@ -151,7 +151,7 @@ exit /b 0
 
 :: -V, -h/--help and -P will not be displayed here
 :display_available_operations
-set availableOperations=S
+set availableOperations=S Ss Su Suy U Q R
 
 if %chocolateyFound%==false (
   set availableOperations=
@@ -196,18 +196,31 @@ goto :eof
 goto :eof
 
 :handle_operation_S
-@echo launch operation %operation%
-@echo options: noConfirm=%noConfirm%, downloadOnly=%downloadOnly%
-@echo raw parameters: %rawParameters%
-exit /b 0
+set parameters=
+if %noConfirm%==true (
+  set parameters=--yes
+)
+set parameters=%parameters% %rawParameters%
+choco install %parameters%
+exit /b %ERRORLEVEL%
 
 :handle_operation_Ss
-call :handle_invalid_operation Ss
-exit /b 1
+choco search %rawParameters%
+exit /b %ERRORLEVEL%
 
 :handle_operation_Su
-call :handle_invalid_operation Su
-exit /b 1
+set parameters=
+if "%rawParameters%"=="" (
+  set parameters=all
+) else (
+  set parameters=%rawParameters%
+)
+if %noConfirm%==true (
+  set parameters=%parameters% --yes
+)
+@echo choco upgrade %parameters%
+choco upgrade %parameters%
+exit /b %ERRORLEVEL%
 
 :handle_operation_Sy
 call :handle_invalid_operation Sy
@@ -218,8 +231,7 @@ exit /b 1
 :: both operations will be considered the same
 
 :handle_operation_Syu
-call :handle_invalid_operation Syu
-exit /b 1
+goto :handle_operation_Su
 
 :handle_operation_Sc
 call :handle_invalid_operation Sc
@@ -234,12 +246,11 @@ call :handle_invalid_operation Sccc
 exit /b 1
 
 :handle_operation_U
-call :handle_invalid_operation U
-exit /b 1
+goto :handle_operation_Su
 
 :handle_operation_Q
-call :handle_invalid_operation Q
-exit /b 1
+choco list %rawParameters% --localonly
+exit /b %ERRORLEVEL%
 
 :handle_operation_Qc
 call :handle_invalid_operation Qc
@@ -270,5 +281,11 @@ call :handle_invalid_operation Qs
 exit /b 1
 
 :handle_operation_R
-call :handle_invalid_operation R
-exit /b 1
+set parameters=
+
+if %noConfirm%==true (
+  set parameters=--yes
+)
+set parameters=%parameters% --removedependencies
+choco uninstall %rawParameters% %parameters%
+exit /b %ERRORLEVEL%
