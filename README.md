@@ -19,5 +19,5 @@ At this point there is no implemented operations yet
 
 ```
             Q Qc Qi Ql Qm Qo Qp Qs Qu R Rn Rns Rs S Sc Scc Sccc Si Sii Sl Ss Su Suy Sw Sy U
-chocolatey  .  .  .  .  .  .  .  .  . .  .   .  . .  .   .    .  .   .  .  .  .   .  .  . .
+chocolatey  y  .  .  .  .  .  .  .  . y  .   .  . y  .   .    .  .   .  .  y  y   y  .  . y
 ```
